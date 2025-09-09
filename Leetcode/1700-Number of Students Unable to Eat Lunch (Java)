@@ -1,0 +1,41 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class StudentsUnableToEat {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> studentQueue = new LinkedList<>();
+        
+        // Add all students to the queue
+        for (int student : students) {
+            studentQueue.add(student);
+        }
+        
+        int index = 0; // pointer to the current sandwich
+        int attempts = 0; // track how many times we have rotated through the queue
+        
+        while (!studentQueue.isEmpty() && attempts < studentQueue.size()) {
+            if (studentQueue.peek() == sandwiches[index]) {
+                // Student takes the sandwich
+                studentQueue.poll();
+                index++;
+                attempts = 0; // reset attempts when a sandwich is taken
+            } else {
+                // Student moves to the end of the queue
+                studentQueue.add(studentQueue.poll());
+                attempts++;
+            }
+        }
+        
+        return studentQueue.size();
+    }
+
+    public static void main(String[] args) {
+        StudentsUnableToEat solution = new StudentsUnableToEat();
+
+        int[] students = {1,1,0,0};
+        int[] sandwiches = {0,1,0,1};
+
+        int result = solution.countStudents(students, sandwiches);
+        System.out.println("Students unable to eat: " + result); // Output: 0
+    }
+}
