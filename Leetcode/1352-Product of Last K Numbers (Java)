@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class ProductOfNumbers {
+    private List<Integer> prefixProducts;
+
+    public ProductOfNumbers() {
+        prefixProducts = new ArrayList<>();
+        prefixProducts.add(1); // Initial value for multiplication
+    }
+
+    public void add(int num) {
+        if (num == 0) {
+            // Reset if zero is added because any product including zero is zero
+            prefixProducts = new ArrayList<>();
+            prefixProducts.add(1);
+        } else {
+            int lastProduct = prefixProducts.get(prefixProducts.size() - 1);
+            prefixProducts.add(lastProduct * num);
+        }
+    }
+
+    public int getProduct(int k) {
+        int n = prefixProducts.size();
+        if (k >= n) {
+            // If k is larger than available non-zero sequence, return 0
+            return 0;
+        }
+        int lastProduct = prefixProducts.get(n - 1);
+        int prevProduct = prefixProducts.get(n - 1 - k);
+        return lastProduct / prevProduct;
+    }
+}
