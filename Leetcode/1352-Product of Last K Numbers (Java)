@@ -6,12 +6,12 @@ class ProductOfNumbers {
 
     public ProductOfNumbers() {
         prefixProducts = new ArrayList<>();
-        prefixProducts.add(1); // Initial value for multiplication
+        prefixProducts.add(1);
     }
 
     public void add(int num) {
         if (num == 0) {
-            // Reset if zero is added because any product including zero is zero
+          
             prefixProducts = new ArrayList<>();
             prefixProducts.add(1);
         } else {
@@ -23,7 +23,7 @@ class ProductOfNumbers {
     public int getProduct(int k) {
         int n = prefixProducts.size();
         if (k >= n) {
-            // If k is larger than available non-zero sequence, return 0
+            
             return 0;
         }
         int lastProduct = prefixProducts.get(n - 1);
